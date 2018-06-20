@@ -1,0 +1,24 @@
+{
+  "name": "mars-robots",
+  "version": "1.0.0",
+  "description": "move robots around a grid",
+  "main": "lib/index.js",
+  "engines": {
+    "node": "^10.0.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jshado1/mars-robots.git"
+  },
+  "author": "Jacob Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jshado1/mars-robots/issues"
+  },
+  "homepage": "https://github.com/jshado1/mars-robots#readme",
+  "devDependencies": {
+    "@types/node": "^10.3.4",
+    "typescript": "^2.9.2"
+  }
+}
