@@ -37,13 +37,15 @@ class Planet {
 	moveRobot(
 		robotId: Robot['id'],
 		val: Orientation,
-	): Position | void {
+	): Position {
 		const robot = this.robots[robotId];
 
 		if (
 			!robot
 			|| robot.isLost
-		) { return; }
+		) {
+			return robot.position;
+		}
 
 		const { edges } = this;
 
@@ -52,7 +54,9 @@ class Planet {
 			coords,
 		] = p;
 
-		if (this.cliffs.has(coords)) { return; }
+		if (this.cliffs.has(coords)) {
+			return robot.position;
+		}
 
 		if (
 			coords.x < 0
