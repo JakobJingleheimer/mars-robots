@@ -8,13 +8,18 @@ import {
 } from './';
 
 
-class Mars {
+class Planet {
 	protected cliffs: Set<Coords> = new Set();
 	readonly edges: Coords;
+	name: string;
 	protected robots: { [id: string]: Robot } = {};
 
-	constructor(edges: Coords = { x: 50, y: 50 }) {
+	constructor(
+		name: string,
+		edges: Coords = { x: 50, y: 50 },
+	) {
 		this.edges = edges;
+		this.name = name;
 	}
 
 	addRobot(
@@ -60,7 +65,9 @@ class Mars {
 		}
 
 		robot.position = p;
+
+		return robot.position;
 	}
 }
 
-export default Mars;
+export default Planet;
