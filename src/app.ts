@@ -11,7 +11,7 @@ import {
 const instructions = (process.argv[2] || '')
 	.split(';')
 	.map((set) => set.split('&'));
-const gridDimentions = process.argv[3].split('&');
+const gridDimentions = (process.argv[3] || '').split('&');
 /* ========== Read input ========== */
 
 const planetInit: Array<(string | Coords)> = ['Mars'];
