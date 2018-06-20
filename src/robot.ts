@@ -10,6 +10,10 @@ import {
 } from './';
 
 
+/**
+ * A map of turns based on direction.
+ * @var {CardinalOrientations} cardinalOrientations
+ */
 const cardinalOrientations: CardinalOrientations = {
 	[CardinalDirection.East]: {
 		[Orientation.Left]: CardinalDirection.North,
@@ -30,21 +34,22 @@ const cardinalOrientations: CardinalOrientations = {
 };
 
 class Robot {
-	coordinates: Coords;
+	protected coordinates: Coords;
 	readonly id = generateSimpleKey();
-	isLost: boolean = false;
+	readonly isLost: boolean = false;
 	protected _facing: CardinalDirection;
 
+	/**
+	 * This method creates a new robot and places it on the grid.
+	 * @param  {Coords} startCoords - Where the robot should start on the grid.
+	 * @param  {CardinalDirection} - Which direction the robot should initially face.
+	 */
 	constructor(
 		startCoords: Coords,
 		startDirection: CardinalDirection,
 	) {
 		this.coordinates = startCoords;
 		this._facing = startDirection;
-	}
-
-	get facing(): CardinalDirection {
-		return this._facing;
 	}
 
 	get position(): Position {
@@ -67,17 +72,21 @@ class Robot {
 		});
 	}
 
-	prepare(val: Orientation): Position {
+	/**
+	 * @param  {Orientation} orientation - Where the robot should prepare to go.
+	 * @return {Position} - The result of the would-be move.
+	 */
+	prepare(orientation: Orientation): Position {
 		const {
 			coordinates,
 			_facing,
 			isLost,
 		} = this;
 
-		if (val !== Orientation.Forward) {
+		if (orientation !== Orientation.Forward) {
 			return [
 				coordinates,
-				cardinalOrientations[_facing][val],
+				cardinalOrientations[_facing][orientation],
 				isLost,
 			];
 		}
@@ -85,7 +94,7 @@ class Robot {
 		let axis: Axises;
 		let delta: number;
 
-		switch (_facing) {
+		switch (_facing) { // @todo DRY this up
 			case CardinalDirection.East:
 				axis = Axises.Y;
 				delta = 1;
