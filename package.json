@@ -2,7 +2,7 @@
   "name": "mars-robots",
   "version": "1.0.0",
   "description": "move robots around a grid",
-  "main": "lib/index.js",
+  "main": "lib/app.js",
   "engines": {
     "node": "^10.0.0"
   },

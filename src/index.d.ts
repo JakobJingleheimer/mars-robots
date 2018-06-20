@@ -1,7 +1,6 @@
 export const enum Orientation {
 	Forward = 'F',
 	Left = 'L',
-	Lost = 'LOST',
 	Right = 'R',
 }
 
