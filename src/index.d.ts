@@ -1,7 +1,6 @@
-export const enum Orientation {
-	Forward = 'F',
-	Left = 'L',
-	Right = 'R',
+export const enum Axises {
+	X = 'x',
+	Y = 'y'
 }
 
 export const enum CardinalDirection {
@@ -11,14 +10,15 @@ export const enum CardinalDirection {
 	West = 'W',
 }
 
-export const enum Axises {
-	X = 'x',
-	Y = 'y'
-}
-
 export type Coords = {
 	[a in Axises]: number;
 };
+
+export const enum Movement {
+	Forward = 'F',
+	Left = 'L',
+	Right = 'R',
+}
 
 export type Position = [
 	Coords,
@@ -28,7 +28,7 @@ export type Position = [
 
 export type CardinalOrientations = {
 	[cd in CardinalDirection]: {
-		[Orientation.Left]: CardinalDirection;
-		[Orientation.Right]: CardinalDirection;
+		[Movement.Left]: CardinalDirection;
+		[Movement.Right]: CardinalDirection;
 	};
 };

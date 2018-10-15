@@ -5,7 +5,7 @@ import {
 	CardinalOrientations,
 	CardinalDirection,
 	Coords,
-	Orientation,
+	Movement,
 	Position,
 } from './';
 
@@ -16,24 +16,24 @@ import {
  */
 const cardinalOrientations: CardinalOrientations = {
 	[CardinalDirection.East]: {
-		[Orientation.Left]: CardinalDirection.North,
-		[Orientation.Right]: CardinalDirection.South,
+		[Movement.Left]: CardinalDirection.North,
+		[Movement.Right]: CardinalDirection.South,
 	},
 	[CardinalDirection.North]: {
-		[Orientation.Left]: CardinalDirection.West,
-		[Orientation.Right]: CardinalDirection.East,
+		[Movement.Left]: CardinalDirection.West,
+		[Movement.Right]: CardinalDirection.East,
 	},
 	[CardinalDirection.South]: {
-		[Orientation.Left]: CardinalDirection.East,
-		[Orientation.Right]: CardinalDirection.West,
+		[Movement.Left]: CardinalDirection.East,
+		[Movement.Right]: CardinalDirection.West,
 	},
 	[CardinalDirection.West]: {
-		[Orientation.Left]: CardinalDirection.South,
-		[Orientation.Right]: CardinalDirection.North,
+		[Movement.Left]: CardinalDirection.South,
+		[Movement.Right]: CardinalDirection.North,
 	},
 };
 
-class Robot {
+export default class Robot {
 	protected coordinates: Coords;
 	readonly id = generateSimpleKey();
 	readonly isLost: boolean = false;
@@ -73,20 +73,20 @@ class Robot {
 	}
 
 	/**
-	 * @param  {Orientation} orientation - Where the robot should prepare to go.
+	 * @param  {Movement} movement - Where the robot should prepare to go.
 	 * @return {Position} - The result of the would-be move.
 	 */
-	prepare(orientation: Orientation): Position {
+	prepare(movement: Movement): Position {
 		const {
 			coordinates,
 			_facing,
 			isLost,
 		} = this;
 
-		if (orientation !== Orientation.Forward) {
+		if (movement !== Movement.Forward) {
 			return [
 				coordinates,
-				cardinalOrientations[_facing][orientation],
+				cardinalOrientations[_facing][movement],
 				isLost,
 			];
 		}
@@ -107,7 +107,7 @@ class Robot {
 				axis = Axises.X;
 				delta = -1;
 				break;
-			case CardinalDirection.East:
+			case CardinalDirection.West:
 				axis = Axises.Y;
 				delta = -1;
 				break;
@@ -124,5 +124,3 @@ class Robot {
 		];
 	}
 }
-
-export default Robot;

@@ -3,7 +3,7 @@ import Robot from './robot';
 import {
 	CardinalDirection,
 	Coords,
-	Orientation,
+	Movement,
 	Position,
 } from './';
 
@@ -40,7 +40,7 @@ instructions.reduce(
 		const positions: Position[] = [...moveList]
 			.map((m) => mars.moveRobot(
 				id,
-				m as Orientation,
+				m as Movement,
 			));
 		const [
 			coords,
