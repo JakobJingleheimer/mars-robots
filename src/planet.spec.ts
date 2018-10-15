@@ -154,7 +154,7 @@ describe('Planet', () => {
 					Movement.Forward,
 				);
 
-				expect(planet.cliffs).to.contain(coords);
+				expect(planet.cliffs[`${coords.x}.${coords.y}`]).to.be.true;
 			});
 		});
 
@@ -196,7 +196,7 @@ describe('Planet', () => {
 					false,
 				];
 				sandbox.stub(planet, 'cliffs').value({
-					has: () => true,
+					'0.0': true,
 				});
 
 				ss.position.get(() => mockPosition);

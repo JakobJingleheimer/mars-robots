@@ -10,9 +10,14 @@ import {
 
 /**
  * Create a planet and dispatch robots to it!
+ * @property {Hashmap} cliffs - A hashmap of known sposts where robots become lost, keyed by $x.$y
+ * in order to ensure a time complexity of O(1).
+ * @property {Coords} edges - The bounds of the planet's grid.
+ * @property {string} name - The planet's name.
+ * @property {Hashmap} robots - A collection of robots on the planet.
  */
 export default class Planet {
-	readonly cliffs: Set<Coords> = new Set();
+	readonly cliffs: { [key: string]: boolean } = {};
 	readonly edges: Coords;
 	readonly name: string;
 	readonly robots: { [id: string]: Robot } = {};
@@ -69,8 +74,9 @@ export default class Planet {
 		const [
 			coords,
 		] = p;
+		const cliffKey = `${coords.x}.${coords.y}`;
 
-		if (this.cliffs.has(coords)) {
+		if (this.cliffs[cliffKey]) {
 			return robot.position;
 		}
 
@@ -81,7 +87,7 @@ export default class Planet {
 			|| coords.y > edges.y
 		) {
 			p[2] = true;
-			this.cliffs.add(coords);
+			this.cliffs[cliffKey] = true;
 		}
 
 		robot.position = p;
